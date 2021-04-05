@@ -1,0 +1,41 @@
+expr  : expr  OR expr2 
+      | expr2 ;
+
+expr2 : expr2 AND expr3 
+      | expr3 ;
+
+expr3 : NOT expr3
+      | expr4 ;
+
+expr4 : expr5 LESS expr5
+      | expr5 LESSEQ expr5
+      | expr5 EQUAL expr5
+      | expr5 GREATEREQ expr5
+      | expr5 GREATER expr5
+      | expr5 NOTEQ expr5
+      | expr5 ;
+
+expr5 : expr5 ADD expr6
+      | expr5 SUB expr6
+      | expr6 ;
+
+expr6 : expr6 MULTI expr7
+      | expr6 DIVIDE expr7
+      | expr6 MODULO expr7
+      | expr7 ;
+
+expr7 : SUB expr7
+      | ADD expr7
+      | term ;
+
+term  : target
+      | LPAREN  expr  RPAREN 
+      | simple_value
+      | primary ;
+
+target : identifier   optional_suffix ;
+
+primary			: invoke_func
+			;
+
+
